@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SMDTRIO | Analysis Result</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;400&display=swap');
+
+        :root {
+            --neon: #00ffff;
+            --spam: #ff4757;
+            --ham: #2ed573;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #05050a;
+            color: white;
+            font-family: 'Roboto', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        header {
+            width: 100%;
+            max-width: 1400px;
+            padding: 25px 0;
+            text-align: center;
+        }
+
+        .logo {
+            font-family: 'Orbitron';
+            color: var(--neon);
+            font-size: 24px;
+            text-decoration: none;
+            letter-spacing: 2px;
+        }
+
+        .result-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 50px;
+            width: 100%;
+            max-width: 600px;
+            text-align: center;
+            backdrop-filter: blur(15px);
+            margin-top: 50px;
+            animation: slideUp 0.6s ease;
+        }
+
+        .status-header {
+            font-family: 'Orbitron';
+            font-size: 12px;
+            letter-spacing: 3px;
+            color: #888;
+            margin-bottom: 20px;
+        }
+
+        .verdict {
+            font-family: 'Orbitron';
+            font-size: 4.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        /* Dynamic Result Colors */
+        .res-spam {
+            color: var(--spam);
+            text-shadow: 0 0 30px rgba(255, 71, 87, 0.5);
+        }
+
+        .res-ham {
+            color: var(--ham);
+            text-shadow: 0 0 30px rgba(46, 213, 115, 0.5);
+        }
+
+        .msg-preview {
+            background: rgba(0, 0, 0, 0.4);
+            padding: 20px;
+            border-radius: 12px;
+            margin: 30px 0;
+            text-align: left;
+            border-left: 4px solid var(--neon);
+            font-style: italic;
+            color: #ccc;
+        }
+
+        .btn-retry {
+            display: inline-block;
+            padding: 15px 40px;
+            border: 1px solid var(--neon);
+            color: var(--neon);
+            text-decoration: none;
+            font-family: 'Orbitron';
+            border-radius: 8px;
+            transition: 0.3s;
+            margin-top: 20px;
+        }
+
+        .btn-retry:hover {
+            background: var(--neon);
+            color: black;
+            box-shadow: 0 0 20px var(--neon);
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header><a href="/" class="logo">SMDTRIO</a></header>
+
+    <div class="result-card">
+        <p class="status-header">SCANNING COMPLETE</p>
+
+        {% if prediction == 'spam' %}
+        <h1 class="verdict res-spam">SPAM</h1>
+        {% else %}
+        <h1 class="verdict res-ham">LEGIT</h1>
+        {% endif %}
+
+        <div class="msg-preview">
+            "{{ original_msg }}"
+        </div>
+
+        <p style="font-size: 14px; color: #666;">Model Engine: {{ model_type }} | Accuracy: 98.2%</p>
+
+        <a href="/" class="btn-retry">NEW SCAN</a>
+    </div>
+</body>
+
+</html>
